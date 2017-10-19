@@ -1,0 +1,36 @@
+{
+  "name": "selden1992/ppe",
+  "description": "framework",
+  "license": "proprietary",
+  "type": "project",
+  "authors": [
+    {
+      "name": "ming yue you se",
+      "email": "2206582181@qq.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Apps\\": "apps/",
+      "Framework\\": "ppe/"
+    },
+    "files":[
+      "ppe/helpers.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "repositories": {
+    "packagist": {
+      "type": "composer",
+      "url": "https://packagist.phpcomposer.com"
+    }
+  },
+  "require": {
+    "vlucas/phpdotenv": "^2.4",
+    "symfony/debug": "^3.3"
+  }
+}

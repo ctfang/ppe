@@ -1,0 +1,10 @@
+/vendor/
+/storage/
+.idea/*
+public/storage
+public/hot
+storage
+.env.*.php
+.env.php
+.env
+composer.phar
