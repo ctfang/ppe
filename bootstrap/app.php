@@ -6,9 +6,17 @@
  * Time: 上午11:14
  */
 
+use Framework\App;
 use Phalcon\Config;
 use Phalcon\DI\FactoryDefault;
-use Symfony\Component\Debug\Debug;
+
+/**
+ * 加载环境配置
+ */
+if( file_exists(__DIR__.'/../.env') ){
+    $env = new Dotenv\Dotenv(__DIR__.'/../');
+    $env->load();
+}
 
 $di = new FactoryDefault();
 
@@ -20,11 +28,7 @@ $di->set('config',function () {
     if (is_array($config)) {
         $config = new Config($config);
     }
-
     return $config;
 });
 
-if( $di->get('config')->debug ){
-    Debug::enable();
-}
-return $di;
+return new App($di);
