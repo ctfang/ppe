@@ -53,6 +53,7 @@ class ModulesRouteServiceProvider extends ServiceProvider
 
         $this->di->set( "router",function (){
             $router = new \Phalcon\Cli\Router();
+            $router->setDefaultModule('cli');
             return $router;
         });
     }
@@ -60,8 +61,9 @@ class ModulesRouteServiceProvider extends ServiceProvider
     private function registerWeb()
     {
         $router     = new Router();
-        $modules    = $this->di->getShared('config')->modules;
-
+        $config     = $this->di->getShared('config');
+        $modules    = $config->modules;
+        $router->setDefaultModule($config->default_module);
         foreach ($modules as $moduleName => $module) {
             $module['domain'] = $module['domain'] ?? $moduleName;
 

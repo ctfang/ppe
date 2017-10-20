@@ -53,6 +53,12 @@ class CliApp
         return $this;
     }
 
+
+    public function registerModules(array $arrModules)
+    {
+        return $this->console->registerModules($arrModules);
+    }
+
     public function getContent()
     {
 

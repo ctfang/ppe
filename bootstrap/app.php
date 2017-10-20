@@ -16,7 +16,6 @@ $app->initializeServices([
     \Framework\Providers\LoadEnvServiceProvider::class,
     \Framework\Providers\ConfigServiceProvider::class,
     \Framework\Providers\ModulesRouteServiceProvider::class,
-    \Framework\Providers\ViewServiceProvider::class,
     \Framework\Providers\MvcDispatcherServiceProvider::class,
 ]);
 

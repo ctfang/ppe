@@ -16,6 +16,11 @@ return [
      * 时间戳
      */
     'timezone' => env('TIMEZONE','Asia/Shanghai'),
+
+    /**
+     * 默认模块
+     */
+    'default_module'=>'index',
     /**
      * 模块配置
      */

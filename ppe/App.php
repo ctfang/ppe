@@ -8,6 +8,7 @@
 
 namespace Framework;
 
+use Framework\Core\CliCore;
 use Framework\Core\FullCore;
 use Framework\Core\MicroCore;
 use Framework\Providers\ServiceProviderInterface;
@@ -42,6 +43,13 @@ class App
         $this->initDebug();
         if( !IS_CLI ){
             $this->initModule();
+        }else{
+            $this->application->registerModules([
+                'cli'=>[
+                    "className" => CliCore::class,
+                    "path"      => __DIR__ . '/core/CliCore.php',
+                ],
+            ]);
         }
     }
 
