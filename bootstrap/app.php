@@ -7,28 +7,19 @@
  */
 
 use Framework\App;
-use Phalcon\Config;
-use Phalcon\DI\FactoryDefault;
 
-/**
- * 加载环境配置
- */
-if( file_exists(__DIR__.'/../.env') ){
-    $env = new Dotenv\Dotenv(__DIR__.'/../');
-    $env->load();
-}
+defined('IS_CLI') or define('IS_CLI',false);
 
-$di = new FactoryDefault();
+$app = new App(dirname(__DIR__));
 
-/**
- * 基础配置加载
- */
-$di->set('config',function () {
-    $config = require __DIR__.'/../config/app.php';
-    if (is_array($config)) {
-        $config = new Config($config);
-    }
-    return $config;
-});
+$app->initializeServices([
+    \Framework\Providers\LoadEnvServiceProvider::class,
+    \Framework\Providers\ConfigServiceProvider::class,
+    \Framework\Providers\ModulesRouteServiceProvider::class,
+    \Framework\Providers\ViewServiceProvider::class,
+    \Framework\Providers\MvcDispatcherServiceProvider::class,
+]);
 
-return new App($di);
+$app->init();
+
+return $app;
