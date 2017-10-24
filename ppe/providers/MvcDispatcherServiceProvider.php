@@ -33,7 +33,6 @@ class MvcDispatcherServiceProvider extends ServiceProvider
             function () {
                 if( IS_CLI ){
                     $dispatcher = new Dispatcher();
-                    IS_CRON and $dispatcher->setTaskSuffix('Cron');
                 }else{
                     $dispatcher = new DispatcherMvc();
                 }

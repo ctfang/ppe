@@ -15,6 +15,7 @@ use Framework\Providers\ServiceProviderInterface;
 use Phalcon\DI\FactoryDefault;
 use Phalcon\Mvc\Application;
 use Symfony\Component\Debug\Debug;
+use Symfony\Component\Debug\DebugClassLoader;
 use Symfony\Component\Debug\ErrorHandler;
 
 class App
@@ -57,6 +58,7 @@ class App
     {
         if ($this->di->get('config')->debug) {
             Debug::enable();
+            DebugClassLoader::disable();
         } else {
             ErrorHandler::register();
         }

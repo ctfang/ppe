@@ -22,7 +22,7 @@ class CliCore implements ModuleDefinitionInterface
      */
     public function registerAutoloaders(DiInterface $dependencyInjector = null)
     {
-        echo "OK";
+
     }
 
     /**
@@ -32,6 +32,6 @@ class CliCore implements ModuleDefinitionInterface
      */
     public function registerServices(DiInterface $dependencyInjector)
     {
-        // TODO: Implement registerServices() method.
+
     }
 }

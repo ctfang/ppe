@@ -33,23 +33,12 @@ class ModulesRouteServiceProvider extends ServiceProvider
     {
         $applicationPath = $this->di->getShared('bootstrap')->applicationPath;
 
-        define('IS_CRON',(isset($GLOBALS['argv'][1]) && $GLOBALS['argv'][1]==CRON_STR)?true:false);
-
-        if( IS_CRON ){
-            $this->di->set('module',function ()use ($applicationPath){
-                return new Config([
-                    'modulePath'=>$applicationPath.'/console',
-                    'defaultNamespace'=>"\\Apps\\Console\\Cron",
-                ]);
-            });
-        }else{
-            $this->di->set('module',function ()use ($applicationPath){
-                return new Config([
-                    'modulePath'=>$applicationPath.'/console',
-                    'defaultNamespace'=>"\\Apps\\Console\\Tasks",
-                ]);
-            });
-        }
+        $this->di->set('module',function ()use ($applicationPath){
+            return new Config([
+                'modulePath'=>$applicationPath.'/console',
+                'defaultNamespace'=>"\\Apps\\Console\\Tasks",
+            ]);
+        });
 
         $this->di->set( "router",function (){
             $router = new \Phalcon\Cli\Router();

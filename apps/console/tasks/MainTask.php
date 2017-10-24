@@ -9,7 +9,12 @@
 namespace Apps\Console\Tasks;
 
 
-class MainTask extends AboutTask
-{
+use Phalcon\Cli\Task;
 
+class MainTask extends Task
+{
+    public function main()
+    {
+        echo "OK\n";
+    }
 }

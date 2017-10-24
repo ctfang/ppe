@@ -15,6 +15,6 @@ class AboutTask extends Task
 {
     public function main()
     {
-        echo __LINE__;
+        echo "OK\n";
     }
 }

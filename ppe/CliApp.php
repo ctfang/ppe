@@ -28,25 +28,18 @@ class CliApp
         $argv      = $GLOBALS['argv'];
         unset($argv[0]);
         if( isset($argv[1])  ) {
-            if ( IS_CRON ) {
-                unset($argv[1]);
-                if (isset($argv[2])) {
-                    $arguments['task'] = $argv[2];
-                    unset($argv[2]);
-                }
-                if (isset($argv[3])) {
-                    $arguments['action'] = $argv[3];
-                    unset($argv[3]);
-                }
+            $arguments['task'] = $argv[1];
+            unset($argv[1]);
+            if( isset($argv[2]) ){
+                $arguments['action'] = $argv[2];
+                unset($argv[2]);
             }else{
-                $arguments['task'] = $argv[1];
-                if( isset($argv[2]) ){
-                    $arguments['action'] = $argv[2];
-                    unset($argv[2]);
-                }
+                $arguments['action'] = 'main';
             }
+        }else{
+            $arguments['task']   = 'main';
+            $arguments['action'] = 'main';
         }
-
         $arguments['params'] = $argv??[];
 
         $this->console->handle($arguments);
