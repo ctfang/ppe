@@ -3,8 +3,6 @@
 
 require __DIR__.'/../bootstrap/autoload.php';
 
-$di = require __DIR__.'/../bootstrap/app.php';
-
-$app = (new \Framework\Application($di));
+$app = require __DIR__.'/../bootstrap/app.php';
 
 $response = $app->handle();

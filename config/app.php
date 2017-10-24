@@ -16,15 +16,28 @@ return [
      * 时间戳
      */
     'timezone' => env('TIMEZONE','Asia/Shanghai'),
+
+    /**
+     * 默认模块
+     */
+    'default_module'=>'index',
     /**
      * 模块配置
      */
     'modules' => [
-        "frontend" => [
-            // 命名空间格式
-            "nameSpace" => 'Frontend',
+        "index" => [
+            // 命名空间格式名称
+            "nameSpace" => 'Index',
             // 绑定的域名
-            "domain" => "../apps/modules/frontend/Module.php",
+            "domain" => "www.ppe.app",
+            // 核心类型
+            'core' => 'full',
+        ],
+        "demo" => [
+            // 命名空间格式名称
+            "nameSpace" => 'Demo',
+            // 绑定的域名
+            "domain" => "ppe.app",
             // 核心类型
             'core' => 'full',
         ],

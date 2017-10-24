@@ -6,25 +6,19 @@
  * Time: 上午11:14
  */
 
-use Phalcon\Config;
-use Phalcon\DI\FactoryDefault;
-use Symfony\Component\Debug\Debug;
+use Framework\App;
 
-$di = new FactoryDefault();
+defined('IS_CLI') or define('IS_CLI',false);
 
-/**
- * 基础配置加载
- */
-$di->set('config',function () {
-    $config = require __DIR__.'/../config/app.php';
-    if (is_array($config)) {
-        $config = new Config($config);
-    }
+$app = new App(dirname(__DIR__));
 
-    return $config;
-});
+$app->initializeServices([
+    \Framework\Providers\LoadEnvServiceProvider::class,
+    \Framework\Providers\ConfigServiceProvider::class,
+    \Framework\Providers\ModulesRouteServiceProvider::class,
+    \Framework\Providers\MvcDispatcherServiceProvider::class,
+]);
 
-if( $di->get('config')->debug ){
-    Debug::enable();
-}
-return $di;
+$app->init();
+
+return $app;
