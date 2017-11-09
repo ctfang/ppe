@@ -43,6 +43,7 @@ class CliApp
         $arguments['params'] = $argv??[];
 
         $this->console->handle($arguments);
+
         return $this;
     }
 
@@ -54,6 +55,6 @@ class CliApp
 
     public function getContent()
     {
-
+        echo "\n";
     }
 }

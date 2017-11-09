@@ -9,12 +9,12 @@
 namespace Framework\Core;
 
 
+use Framework\Providers\ServiceProviderInterface;
 use Phalcon\DiInterface;
 use Phalcon\Mvc\ModuleDefinitionInterface;
 
 class FullCore implements ModuleDefinitionInterface
 {
-
     /**
      * Registers an autoloader related to the module
      *
@@ -22,16 +22,31 @@ class FullCore implements ModuleDefinitionInterface
      */
     public function registerAutoloaders(DiInterface $dependencyInjector = null)
     {
-        echo "注册加载";
+        //echo "注册加载";
     }
 
     /**
      * Registers services related to the module
      *
-     * @param DiInterface $dependencyInjector
+     * @param DiInterface $di
      */
-    public function registerServices(DiInterface $dependencyInjector)
+    public function registerServices(DiInterface $di)
     {
-        echo "注册服务";
+        $providers = include $di->getShared('module')->modulePath . "/config/providers.php";
+        foreach ($providers as $name => $class) {
+            $this->initializeService(new $class($di));
+        }
+    }
+
+    /**
+     * Initialize the Service in the Dependency Injector Container.
+     *
+     * @param ServiceProviderInterface $serviceProvider
+     *
+     * @return $this
+     */
+    protected function initializeService(ServiceProviderInterface $serviceProvider)
+    {
+        $serviceProvider->register();
     }
 }

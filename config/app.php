@@ -33,11 +33,11 @@ return [
             // 核心类型
             'core' => 'full',
         ],
-        "demo" => [
+        "search" => [
             // 命名空间格式名称
-            "nameSpace" => 'Demo',
+            "nameSpace" => 'Search',
             // 绑定的域名
-            "domain" => "ppe.app",
+            "domain" => "www.ppe.app",
             // 核心类型
             'core' => 'full',
         ],

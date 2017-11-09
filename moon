@@ -2,7 +2,6 @@
 <?php
 
 define('IS_CLI',true);
-define('CRON_STR','cron');
 
 require __DIR__.'/bootstrap/autoload.php';
 

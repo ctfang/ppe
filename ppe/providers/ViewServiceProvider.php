@@ -22,16 +22,14 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $viewDir = $this->di->getShared('bootstrap')->applicationPath . 'views/';
         // Registering a shared view component
-        $this->di->set(
-            "view",
-            function () {
-                $view = new View();
+        $this->di->set($this->serviceName, function () use ($viewDir) {
+            $view = new View();
 
-                $view->setViewsDir("../apps/common/views/");
+            $view->setViewsDir($viewDir);
 
-                return $view;
-            }
-        );
+            return $view;
+        });
     }
 }

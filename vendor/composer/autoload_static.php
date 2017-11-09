@@ -22,6 +22,7 @@ class ComposerStaticInitc5d32e88775791ae00cf0ff0c9df3933
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Component\\VarDumper\\' => 28,
             'Symfony\\Component\\Debug\\' => 24,
+            'Symfony\\Component\\Console\\' => 26,
         ),
         'P' => 
         array (
@@ -57,6 +58,10 @@ class ComposerStaticInitc5d32e88775791ae00cf0ff0c9df3933
         'Symfony\\Component\\Debug\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/debug',
+        ),
+        'Symfony\\Component\\Console\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/console',
         ),
         'Psr\\Log\\' => 
         array (

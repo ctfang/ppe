@@ -35,7 +35,7 @@ class ModulesRouteServiceProvider extends ServiceProvider
 
         $this->di->set('module',function ()use ($applicationPath){
             return new Config([
-                'modulePath'=>$applicationPath.'/console',
+                'modulePath'=>$applicationPath.'/apps/console',
                 'defaultNamespace'=>"\\Apps\\Console\\Tasks",
             ]);
         });
@@ -109,7 +109,7 @@ class ModulesRouteServiceProvider extends ServiceProvider
         $nameSpace       = $modules[$moduleName]['nameSpace'];
 
         $module = new Config([
-            'modulePath'=>$applicationPath.'/modules/'.$moduleName,
+            'modulePath'=>$applicationPath.'/apps/modules/'.$moduleName,
             'defaultNamespace'=>"\\Apps\\Modules\\{$nameSpace}\\Controllers",
         ]);
 
