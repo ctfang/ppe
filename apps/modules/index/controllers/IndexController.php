@@ -8,18 +8,12 @@
 
 namespace Apps\Modules\Index\Controllers;
 
-
-use Phalcon\Mvc\Controller;
+use Apps\Modules\Common\Controllers\Controller;
 
 class IndexController extends Controller
 {
     public function index()
     {
-        echo "OK";
-    }
-
-    public function test()
-    {
-
+        $this->view->pick('home');
     }
 }

@@ -9,7 +9,9 @@
 namespace Framework\Providers;
 
 
+use Phalcon\Di;
 use Phalcon\Mvc\View;
+use Phalcon\Mvc\View\Engine\Volt;
 
 class ViewServiceProvider extends ServiceProvider
 {
@@ -22,13 +24,36 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $viewDir = $this->di->getShared('bootstrap')->applicationPath . 'views/';
+        $di = $this->di;
         // Registering a shared view component
-        $this->di->set($this->serviceName, function () use ($viewDir) {
-            $view = new View();
-
+        $this->di->set($this->serviceName, function () use ($di) {
+            $view    = new View();
+            $viewDir = $di->getShared('bootstrap')->applicationPath . '/apps/modules/index/views';
             $view->setViewsDir($viewDir);
+            $view->registerEngines([
+                ".html" => function ($view, Di $di) {
+                    $volt = new Volt($view, $di);
 
+                    $volt->setOptions([
+                        // 编译目录
+                        'compiledPath' => function ($template) use($di) {
+                            $templatePath = $di->getShared('bootstrap')->applicationPath . '/storage/cache/view';
+
+                            $arrPath = explode('/views/',$template);
+                            unset($arrPath[0]);
+                            $template = implode('',$arrPath);
+
+                            if (!is_dir( dirname($templatePath.'/'.$template) )) {
+                                mkdir(dirname($templatePath.'/'.$template),750,true);
+                            }
+
+                            return $templatePath."/{$template}.php";
+                        },
+                    ]);
+
+                    return $volt;
+                }
+            ]);
             return $view;
         });
     }

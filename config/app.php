@@ -33,14 +33,6 @@ return [
             // 核心类型
             'core' => 'full',
         ],
-        "search" => [
-            // 命名空间格式名称
-            "nameSpace" => 'Search',
-            // 绑定的域名
-            "domain" => "www.ppe.app",
-            // 核心类型
-            'core' => 'full',
-        ],
     ],
     /**
      * 门脸
