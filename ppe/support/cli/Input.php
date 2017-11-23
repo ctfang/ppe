@@ -22,12 +22,12 @@ class Input
         return $default;
     }
 
-    public function has($key)
+    public static function has($key)
     {
         return in_array($key,self::$noKeyParam);
     }
 
-    public static function init(array $arr)
+    public function init(array $arr)
     {
         foreach ($arr as $strData){
             if( strpos($strData,'=') ){

@@ -9,15 +9,21 @@
 namespace Framework;
 
 
+use Framework\Core\CliCore;
+use Framework\Support\Cli\Commands\ScheduleCommand;
+use Framework\Support\Cli\Input;
 use Phalcon\Cli\Console;
+use Symfony\Component\Console\Application;
 
 class CliApp
 {
+    private $di;
     private $console;
 
     public function __construct($di)
     {
-        $this->console = new Console($di);
+        $this->di = $di;
+        $this->console = new Console($this->di);
     }
 
     /**
@@ -25,25 +31,23 @@ class CliApp
      */
     public function handle()
     {
-        $argv      = $GLOBALS['argv'];
-        unset($argv[0]);
-        if( isset($argv[1])  ) {
-            $arguments['task'] = $argv[1];
-            unset($argv[1]);
-            if( isset($argv[2]) ){
-                $arguments['action'] = $argv[2];
-                unset($argv[2]);
-            }else{
-                $arguments['action'] = 'main';
-            }
+        $schedule = 'schedule';
+        if( isset($GLOBALS['argv'][1]) && $schedule==$GLOBALS['argv'][1] ){
+            // 如果是定时任务-则启用phalcon自带的cli应用
+            $arguments['task']   = $GLOBALS['argv'][2] ?? 'main';
+            $arguments['action'] = $GLOBALS['argv'][2] ?? 'main';
+
+            (new Input())->init($GLOBALS['argv']);
+            $this->console->handle($arguments);
         }else{
-            $arguments['task']   = 'main';
-            $arguments['action'] = 'main';
+            $application = new Application();
+            $application->add(new ScheduleCommand($schedule));
+            // 为了模块一致性，手动调用CliCore
+            $core = new CliCore();
+            $core->registerAutoloaders( $this->di );
+            $core->registerServices( $this->di );
+            $application->run();
         }
-        $arguments['params'] = $argv??[];
-
-        $this->console->handle($arguments);
-
         return $this;
     }
 

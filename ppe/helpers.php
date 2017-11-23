@@ -42,3 +42,17 @@ function env($key, $default = null)
 
     return $value;
 }
+if (!function_exists('dd')) {
+    /**
+     * 调试打印
+     *
+     * @param $var
+     */
+    function dd($var)
+    {
+        foreach (func_get_args() as $var) {
+            \Symfony\Component\VarDumper\VarDumper::dump($var);
+        }
+        exit(0);
+    }
+}
