@@ -28,7 +28,7 @@ class ViewServiceProvider extends ServiceProvider
         // Registering a shared view component
         $this->di->set($this->serviceName, function () use ($di) {
             $view    = new View();
-            $viewDir = $di->getShared('bootstrap')->applicationPath . '/apps/modules/index/views';
+            $viewDir = $di->getShared('module')->modulePath . '/Views';
             $view->setViewsDir($viewDir);
             $view->registerEngines([
                 ".html" => function ($view, Di $di) {
@@ -39,7 +39,7 @@ class ViewServiceProvider extends ServiceProvider
                         'compiledPath' => function ($template) use($di) {
                             $templatePath = $di->getShared('bootstrap')->applicationPath . '/storage/cache/view';
 
-                            $arrPath = explode('/views/',$template);
+                            $arrPath = explode('/Views/',$template);
                             unset($arrPath[0]);
                             $template = implode('',$arrPath);
 
