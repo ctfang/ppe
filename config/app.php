@@ -5,6 +5,10 @@
  */
 return [
     /**
+     * 项目名称
+     */
+    'app_name'=>env('APP_NAME','PPE'),
+    /**
      * 调试模块
      */
     'debug' => env('APP_DEBUG', true),

@@ -14,7 +14,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-        //throw new \Exception('发送报错');
+        throw new \Exception('发送报错');
         $this->view->pick('home');
     }
 }
