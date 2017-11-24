@@ -10,8 +10,11 @@ namespace Framework\Core;
 
 
 use Framework\Providers\ServiceProviderInterface;
+use Framework\Support\Exception\ErrorHandlerException;
 use Phalcon\DiInterface;
 use Phalcon\Mvc\ModuleDefinitionInterface;
+use Whoops\Handler\PrettyPageHandler;
+use Whoops\Run;
 
 class FullCore implements ModuleDefinitionInterface
 {
@@ -22,7 +25,10 @@ class FullCore implements ModuleDefinitionInterface
      */
     public function registerAutoloaders(DiInterface $dependencyInjector = null)
     {
-        //echo "注册加载";
+        $whoops = new Run;
+        $whoops->pushHandler(new PrettyPageHandler);
+        $whoops->pushHandler(new ErrorHandlerException());
+        $whoops->register();
     }
 
     /**

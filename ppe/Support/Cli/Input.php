@@ -8,12 +8,22 @@
 
 namespace Framework\Support\Cli;
 
-
+/**
+ * Class Input
+ * @package Framework\Support\Cli
+ */
 class Input
 {
     private static $param;
     private static $noKeyParam;
 
+    /**
+     * 获取参数
+     *
+     * @param $key
+     * @param null $default
+     * @return null
+     */
     public static function get($key,$default=null)
     {
         if( isset(self::$param[$key]) ){
@@ -22,6 +32,12 @@ class Input
         return $default;
     }
 
+    /**
+     * 判断命令行是否输入某个值
+     *
+     * @param $key
+     * @return bool
+     */
     public static function has($key)
     {
         return in_array($key,self::$noKeyParam);

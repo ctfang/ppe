@@ -11,6 +11,8 @@ namespace Framework\Core;
 
 use Phalcon\DiInterface;
 use Phalcon\Mvc\ModuleDefinitionInterface;
+use Whoops\Handler\PrettyPageHandler;
+use Whoops\Run;
 
 class MicroCore implements ModuleDefinitionInterface
 {
@@ -22,7 +24,9 @@ class MicroCore implements ModuleDefinitionInterface
      */
     public function registerAutoloaders(DiInterface $dependencyInjector = null)
     {
-        // TODO: Implement registerAutoloaders() method.
+        $whoops = new Run;
+        $whoops->pushHandler(new PrettyPageHandler);
+        $whoops->register();
     }
 
     /**

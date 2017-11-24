@@ -13,6 +13,10 @@ class ComposerStaticInitc5d32e88775791ae00cf0ff0c9df3933
     );
 
     public static $prefixLengthsPsr4 = array (
+        'W' => 
+        array (
+            'Whoops\\' => 7,
+        ),
         'T' => 
         array (
             'Tests\\' => 6,
@@ -27,6 +31,10 @@ class ComposerStaticInitc5d32e88775791ae00cf0ff0c9df3933
         'P' => 
         array (
             'Psr\\Log\\' => 8,
+        ),
+        'M' => 
+        array (
+            'Monolog\\' => 8,
         ),
         'F' => 
         array (
@@ -43,6 +51,10 @@ class ComposerStaticInitc5d32e88775791ae00cf0ff0c9df3933
     );
 
     public static $prefixDirsPsr4 = array (
+        'Whoops\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/filp/whoops/src/Whoops',
+        ),
         'Tests\\' => 
         array (
             0 => __DIR__ . '/../..' . '/tests',
@@ -66,6 +78,10 @@ class ComposerStaticInitc5d32e88775791ae00cf0ff0c9df3933
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'Monolog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
         'Framework\\' => 
         array (

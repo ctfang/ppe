@@ -56,9 +56,4 @@ class CliApp
     {
         return $this->console->registerModules($arrModules);
     }
-
-    public function getContent()
-    {
-        echo "\n";
-    }
 }
