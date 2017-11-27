@@ -21,9 +21,11 @@ class ProxiesController extends Controller
     {
         $url        = $this->request->get('url');
         $headers    = $this->request->get('headers');
+        $headers    = $headers??[];
         $parameters = $this->request->get('parameters');
+        $parameters = $parameters??[];
         $data       = Request::get($url, $headers, $parameters);
-        echo json_encode($data);
+        echo $data->raw_body;
     }
 
     /**
@@ -33,8 +35,10 @@ class ProxiesController extends Controller
     {
         $url     = $this->request->get('url');
         $headers = $this->request->get('headers');
+        $headers = $headers??[];
         $body    = $this->request->get('body');
+        $body    = $body??[];
         $data    = Request::post($url, $headers, $body);
-        echo json_encode($data);
+        echo $data->raw_body;
     }
 }
