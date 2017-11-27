@@ -38,7 +38,7 @@ class FullCore implements ModuleDefinitionInterface
      */
     public function registerServices(DiInterface $di)
     {
-        $providers = include $di->getShared('module')->modulePath . "/config/providers.php";
+        $providers = include $di->getShared('module')->modulePath . "/Config/providers.php";
         foreach ($providers as $name => $class) {
             $this->initializeService(new $class($di));
         }
