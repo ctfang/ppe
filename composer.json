@@ -35,6 +35,9 @@
     "symfony/var-dumper": "^3.3",
     "symfony/console": "~3.3",
     "monolog/monolog": "~1.12",
-    "filp/whoops": "^2.1.4"
+    "filp/whoops": "^2.1.4",
+    "mashape/unirest-php": "^3.0",
+    "chrisboulton/php-resque": "^1.2",
+    "phpmailer/phpmailer": "^6.0"
   }
 }

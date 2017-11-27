@@ -31,6 +31,7 @@ class ComposerStaticInitc5d32e88775791ae00cf0ff0c9df3933
         'P' => 
         array (
             'Psr\\Log\\' => 8,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'M' => 
         array (
@@ -79,6 +80,10 @@ class ComposerStaticInitc5d32e88775791ae00cf0ff0c9df3933
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+        ),
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
@@ -97,11 +102,29 @@ class ComposerStaticInitc5d32e88775791ae00cf0ff0c9df3933
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'U' => 
+        array (
+            'Unirest\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/mashape/unirest-php/src',
+            ),
+        ),
+        'R' => 
+        array (
+            'Resque' => 
+            array (
+                0 => __DIR__ . '/..' . '/chrisboulton/php-resque/lib',
+            ),
+        ),
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitc5d32e88775791ae00cf0ff0c9df3933::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitc5d32e88775791ae00cf0ff0c9df3933::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitc5d32e88775791ae00cf0ff0c9df3933::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }
