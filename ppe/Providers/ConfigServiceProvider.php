@@ -25,7 +25,7 @@ class ConfigServiceProvider extends ServiceProvider
         $applicationPath = $this->di->getShared('bootstrap')->applicationPath;
 
         $this->di->setShared($this->serviceName,function () use ($applicationPath) {
-            $config = require $applicationPath.'/Config/app.php';
+            $config = require $applicationPath.'/config/app.php';
             if (is_array($config)) {
                 $config = new Config($config);
             }
