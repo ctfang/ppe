@@ -48,7 +48,7 @@ class App
             $this->application->registerModules([
                 'cli'=>[
                     "className" => CliCore::class,
-                    "path"      => __DIR__ . '/core/CliCore.php',
+                    "path"      => __DIR__ . '/Core/CliCore.php',
                 ],
             ]);
         }
@@ -73,13 +73,13 @@ class App
                 case 'full':
                     $arrModules[$moduleName] = [
                         "className" => FullCore::class,
-                        "path"      => __DIR__ . '/core/FullCore.php',
+                        "path"      => __DIR__ . '/Core/FullCore.php',
                     ];
                     break;
                 case 'micro':
                     $arrModules[$moduleName] = [
                         "className" => MicroCore::class,
-                        "path"      => __DIR__ . '/core/MicroCore.php',
+                        "path"      => __DIR__ . '/Core/MicroCore.php',
                     ];
                     break;
             }
