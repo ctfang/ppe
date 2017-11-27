@@ -20,6 +20,7 @@ class ProxiesController extends Controller
     public function get()
     {
         $url        = $this->request->get('url');
+        $url        = urldecode($url);
         $headers    = $this->request->get('headers');
         $headers    = $headers??[];
         $parameters = $this->request->get('parameters');
@@ -34,6 +35,7 @@ class ProxiesController extends Controller
     public function post()
     {
         $url     = $this->request->get('url');
+        $url        = urldecode($url);
         $headers = $this->request->get('headers');
         $headers = $headers??[];
         $body    = $this->request->get('body');
