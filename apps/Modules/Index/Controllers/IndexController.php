@@ -17,4 +17,12 @@ class IndexController extends Controller
         throw new \Exception('发送报错');
         $this->view->pick('home');
     }
+
+    /**
+     * 自动更新代码
+     */
+    public function getPull()
+    {
+        system("git pull");
+    }
 }
