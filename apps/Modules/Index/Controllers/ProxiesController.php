@@ -25,6 +25,7 @@ class ProxiesController extends Controller
         $headers    = $headers??[];
         $parameters = $this->request->get('parameters');
         $parameters = $parameters??[];
+        dd($url, $headers, $parameters);
         $data       = Request::get($url, $headers, $parameters);
         echo $data->raw_body;
     }
