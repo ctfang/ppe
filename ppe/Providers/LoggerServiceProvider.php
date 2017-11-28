@@ -7,8 +7,11 @@
  */
 
 namespace Framework\Providers;
-use Monolog\Handler\StreamHandler;
+
+use Monolog\Formatter\LineFormatter;
+use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
+use Phalcon\Di;
 
 /**
  * Class LoggerServiceProvider
@@ -16,7 +19,8 @@ use Monolog\Logger;
  */
 class LoggerServiceProvider extends ServiceProvider
 {
-    protected $serviceName = 'log';
+    public $serviceName = 'logger';
+
 
     /**
      * Register application service.
@@ -25,10 +29,27 @@ class LoggerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->di->set($this->serviceName, function() {
-            $logger = new Logger('test');
+        $this->di->set($this->serviceName, function () {
+            // log级别，按顺序
+            $levels = array(
+                'debug'     => Logger::DEBUG,
+                'info'      => Logger::INFO,
+                'notice'    => Logger::NOTICE,
+                'warning'   => Logger::WARNING,
+                'error'     => Logger::ERROR,
+                'critical'  => Logger::CRITICAL,
+                'alert'     => Logger::ALERT,
+                'emergency' => Logger::EMERGENCY,
+            );
 
-            $logger->pushHandler(new StreamHandler(__DIR__.'/../../storage/log/me.log',Logger::WARNING));
+            $config   = Di::getDefault()->getShared('config');
+            $logger   = new Logger($config->env);
+            $filename = $config['base_path'] . '/storage/logs/ppe.log';
+            // 最小处理handler
+            $log_level     = $levels[$config->log_level];
+            $StreamHandler = new RotatingFileHandler($filename, $config->log_max_files, $log_level);
+            $StreamHandler->setFormatter(new LineFormatter("[%datetime%] %channel%.%level_name%: %message% %context%\n", null, true));
+            $logger->pushHandler($StreamHandler);
 
             return $logger;
         });

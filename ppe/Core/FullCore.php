@@ -10,11 +10,14 @@ namespace Framework\Core;
 
 
 use Framework\Providers\ServiceProviderInterface;
-use Framework\Support\Exception\ErrorHandlerException;
+use Framework\Support\Exception\LoggerHandlerException;
 use Phalcon\DiInterface;
 use Phalcon\Mvc\ModuleDefinitionInterface;
+use Whoops\Handler\JsonResponseHandler;
+use Whoops\Handler\PlainTextHandler;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
+use Whoops\Util\Misc;
 
 class FullCore implements ModuleDefinitionInterface
 {
@@ -25,10 +28,7 @@ class FullCore implements ModuleDefinitionInterface
      */
     public function registerAutoloaders(DiInterface $dependencyInjector = null)
     {
-        $whoops = new Run;
-        $whoops->pushHandler(new PrettyPageHandler);
-        $whoops->pushHandler(new ErrorHandlerException());
-        $whoops->register();
+
     }
 
     /**
@@ -42,6 +42,21 @@ class FullCore implements ModuleDefinitionInterface
         foreach ($providers as $name => $class) {
             $this->initializeService(new $class($di));
         }
+
+        $whoops = new Run;
+        if( Misc::isCommandLine() ){
+            $PlainTextHandler = new PlainTextHandler();
+            $whoops->pushHandler($PlainTextHandler);
+        }elseif (Misc::isAjaxRequest()){
+            $whoops->pushHandler(new JsonResponseHandler());
+        }else{
+            $PrettyPageHandler = new PrettyPageHandler;
+            $PrettyPageHandler->setPageTitle('发生错误');
+            $whoops->pushHandler(new PrettyPageHandler);
+        }
+        // 日记处理
+        $whoops->pushHandler(new LoggerHandlerException());
+        $whoops->register();
     }
 
     /**

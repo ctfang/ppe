@@ -13,11 +13,27 @@ return [
      */
     'debug' => env('APP_DEBUG', true),
     /**
+     * 环境名称
+     */
+    'env' => env('APP_ENV', 'production'),
+
+    /**
      * 根目录
      */
-    'basePath'=>dirname(__DIR__),
+    'base_path'=>dirname(__DIR__),
+
     /**
-     * 时间戳
+     * 日记配置
+     * 记录最小log级别
+     */
+    'log_level' => env('APP_LOG_LEVEL', 'debug'),
+    /**
+     * 历史log存储日期
+     */
+    'log_max_files' => 30,
+
+    /**
+     * 时区设置
      */
     'timezone' => env('TIMEZONE','Asia/Shanghai'),
 

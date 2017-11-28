@@ -17,7 +17,7 @@ class BookController extends Controller
     public function index()
     {
         $url               = 'http://phalcon.ctfang.com/proxies/get';
-        $parameters['url'] = 'http://www.166xs.com/xiaoshuo/84';
+        $parameters['url'] = 'http://www.dingdian.me/105194/';
         $headers           = [];
         $data              = Request::get($url, $headers, $parameters);
         echo $data->raw_body;

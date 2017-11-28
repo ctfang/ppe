@@ -25,4 +25,12 @@ class IndexController extends Controller
     {
         system("git pull");
     }
+
+    /**
+     * warning日记记录
+     */
+    public function waring()
+    {
+        file_get_contents('/fdasf/fdsafdsa');
+    }
 }
