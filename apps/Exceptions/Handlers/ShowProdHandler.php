@@ -37,7 +37,5 @@ class ShowProdHandler extends Handler
         $view->finish();
 
         echo $view->getContent();
-
-        return Handler::QUIT;
     }
 }
