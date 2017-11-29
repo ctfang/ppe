@@ -43,20 +43,7 @@ class FullCore implements ModuleDefinitionInterface
             $this->initializeService(new $class($di));
         }
 
-        $whoops = new Run;
-        if( Misc::isCommandLine() ){
-            $PlainTextHandler = new PlainTextHandler();
-            $whoops->pushHandler($PlainTextHandler);
-        }elseif (Misc::isAjaxRequest()){
-            $whoops->pushHandler(new JsonResponseHandler());
-        }else{
-            $PrettyPageHandler = new PrettyPageHandler;
-            $PrettyPageHandler->setPageTitle('发生错误');
-            $whoops->pushHandler(new PrettyPageHandler);
-        }
-        // 日记处理
-        $whoops->pushHandler(new LoggerHandlerException());
-        $whoops->register();
+
     }
 
     /**

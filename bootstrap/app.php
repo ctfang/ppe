@@ -18,6 +18,7 @@ $app->initializeServices([
     \Framework\Providers\ModulesRouteServiceProvider::class,
     \Framework\Providers\MvcDispatcherServiceProvider::class,
     \Framework\Providers\LoggerServiceProvider::class,
+    \Framework\Providers\ExceptionHandlerServiceProvider::class,
 ]);
 
 $app->init();

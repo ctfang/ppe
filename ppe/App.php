@@ -8,15 +8,19 @@
 
 namespace Framework;
 
+use Apps\Exceptions\Kernel;
 use Framework\Core\CliCore;
 use Framework\Core\FullCore;
 use Framework\Core\MicroCore;
 use Framework\Providers\ServiceProviderInterface;
+use Framework\Support\Exception\LoggerHandlerException;
 use Phalcon\DI\FactoryDefault;
 use Phalcon\Mvc\Application;
-use Symfony\Component\Debug\Debug;
-use Symfony\Component\Debug\DebugClassLoader;
-use Symfony\Component\Debug\ErrorHandler;
+use Whoops\Handler\JsonResponseHandler;
+use Whoops\Handler\PlainTextHandler;
+use Whoops\Handler\PrettyPageHandler;
+use Whoops\Run;
+use Whoops\Util\Misc;
 
 class App
 {
@@ -38,10 +42,12 @@ class App
         $this->di->setShared('bootstrap', $this);
     }
 
+    /**
+     * 在基础DI注册完后调用
+     */
     public function init()
     {
         $this->application = IS_CLI?new CliApp($this->di):new WebApp($this->di);
-        $this->initDebug();
         if( !IS_CLI ){
             $this->initModule();
         }else{
@@ -54,16 +60,9 @@ class App
         }
     }
 
-    public function initDebug()
-    {
-        if ($this->di->get('config')->debug) {
-            Debug::enable();
-            DebugClassLoader::disable();
-        } else {
-            ErrorHandler::register();
-        }
-    }
-
+    /**
+     * 初始化模块
+     */
     public function initModule()
     {
         $modules    = $this->di->getShared('config')->modules;
