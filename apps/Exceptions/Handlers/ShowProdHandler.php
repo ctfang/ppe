@@ -8,9 +8,7 @@
 
 namespace Apps\Exceptions\Handlers;
 
-
-use Phalcon\Di;
-use Whoops\Handler\Handler;
+use Framework\Support\Handler;
 
 /**
  * @package Apps\Exceptions\Handlers
@@ -22,6 +20,24 @@ class ShowProdHandler extends Handler
      */
     public function handle()
     {
-        //echo 'OK';
+        /**
+         * 当关闭调试模式时
+         * 显示一个精简错误页面
+         * 为了跨模块显示错误页面，这里使用了公共模块的视图
+         */
+        $view = $this->getView();
+
+        // Start the output buffering
+        $view->start();
+
+        // Render all the view hierarchy related to the view products/list.phtml
+        $view->render("Error", "500");
+
+        // Finish the output buffering
+        $view->finish();
+
+        echo $view->getContent();
+
+        return Handler::QUIT;
     }
 }

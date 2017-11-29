@@ -8,19 +8,13 @@
 
 namespace Framework;
 
-use Apps\Exceptions\Kernel;
 use Framework\Core\CliCore;
 use Framework\Core\FullCore;
 use Framework\Core\MicroCore;
 use Framework\Providers\ServiceProviderInterface;
-use Framework\Support\Exception\LoggerHandlerException;
 use Phalcon\DI\FactoryDefault;
 use Phalcon\Mvc\Application;
-use Whoops\Handler\JsonResponseHandler;
-use Whoops\Handler\PlainTextHandler;
-use Whoops\Handler\PrettyPageHandler;
-use Whoops\Run;
-use Whoops\Util\Misc;
+
 
 class App
 {

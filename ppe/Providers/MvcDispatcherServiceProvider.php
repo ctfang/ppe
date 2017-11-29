@@ -8,7 +8,7 @@
 
 namespace Framework\Providers;
 
-use Apps\Exceptions\Handlers\WebHandler;
+use Apps\Exceptions\Handlers\NotRouteHandler;
 use Framework\Support\WebPlugin;
 use Phalcon\Cli\Dispatcher;
 use Phalcon\Di;
@@ -37,17 +37,6 @@ class MvcDispatcherServiceProvider extends ServiceProvider
                     $dispatcher = new Dispatcher();
                 }else{
                     $dispatcher = new DispatcherMvc();
-
-                    // 创建一个事件管理器
-                    $eventsManager = new Manager();
-
-                    // 页面处理异常
-                    $eventsManager->attach("dispatch:beforeException",function ($event, $dispatcher,$exception){
-                        return (new WebHandler($event,$dispatcher,$exception))->handle();
-                    });
-
-                    // 分配事件管理器到分发器
-                    $dispatcher->setEventsManager($eventsManager);
                 }
                 $module     = Di::getDefault()->getShared('module');
                 $dispatcher->setDefaultNamespace($module['defaultNamespace']);

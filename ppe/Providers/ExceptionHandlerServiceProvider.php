@@ -50,7 +50,10 @@ class ExceptionHandlerServiceProvider extends ServiceProvider
 
             (new Kernel())->register($whoops);
 
-            $whoops->register();
+            return $whoops;
         });
+
+        $whoops = $this->di->getShared('exception');
+        $whoops->register();
     }
 }
