@@ -22,10 +22,10 @@ class Kernel implements ExceptionKernel
      */
     public function register(Run &$run)
     {
-        // 404页面显示
-        $run->pushHandler(new NotRouteHandler());
-
         // 500页面显示
         $run->pushHandler(new ShowProdHandler());
+
+        // 404页面显示
+        $run->pushHandler(new NotRouteHandler());
     }
 }
