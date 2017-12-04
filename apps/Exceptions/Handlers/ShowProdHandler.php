@@ -9,6 +9,8 @@
 namespace Apps\Exceptions\Handlers;
 
 use Framework\Support\Handler;
+use Phalcon\Di;
+use Whoops\Exception\ErrorException;
 
 /**
  * @package Apps\Exceptions\Handlers
@@ -30,8 +32,16 @@ class ShowProdHandler extends Handler
         // Start the output buffering
         $view->start();
 
-        // Render all the view hierarchy related to the view products/list.phtml
-        $view->render("Error", "500");
+        try{
+            // Render all the view hierarchy related to the view products/list.phtml
+            $view->render("Error", "500");
+        }catch (ErrorException $exception){
+            $cachePath = Di::getDefault()->getShared('bootstrap')->applicationPath . '/storage/cache/view';
+            if( !is_dir($cachePath) ){
+                mkdir($cachePath,0755,true);
+            }
+            $view->render("Error", "500");
+        }
 
         // Finish the output buffering
         $view->finish();

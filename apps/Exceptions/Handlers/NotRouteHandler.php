@@ -9,7 +9,9 @@
 namespace Apps\Exceptions\Handlers;
 
 use Framework\Support\Handler;
-use Phalcon\Cli\Dispatcher\Exception;
+use Phalcon\Di;
+use Phalcon\Mvc\Dispatcher\Exception;
+use Whoops\Exception\ErrorException;
 
 class NotRouteHandler extends Handler
 {
@@ -29,8 +31,16 @@ class NotRouteHandler extends Handler
             // Start the output buffering
             $view->start();
 
-            // Render all the view hierarchy related to the view products/list.phtml
-            $view->render("Error", "404");
+            try{
+                // Render all the view hierarchy related to the view products/list.phtml
+                $view->render("Error", "404");
+            }catch (ErrorException $exception){
+                $cachePath = Di::getDefault()->getShared('bootstrap')->applicationPath . '/storage/cache/view';
+                if( !is_dir($cachePath) ){
+                    mkdir($cachePath,0755,true);
+                }
+                $view->render("Error", "404");
+            }
 
             // Finish the output buffering
             $view->finish();

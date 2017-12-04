@@ -39,5 +39,8 @@
     "mashape/unirest-php": "^3.0",
     "chrisboulton/php-resque": "^1.2",
     "phpmailer/phpmailer": "^6.0"
+  },
+  "require-dev": {
+    "phalcon/ide-stubs": "*"
   }
 }
