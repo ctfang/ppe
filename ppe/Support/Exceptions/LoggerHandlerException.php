@@ -6,7 +6,7 @@
  * Time: 17:03
  */
 
-namespace Framework\Support\Exception;
+namespace Framework\Support\Exceptions;
 
 
 use Monolog\Logger;

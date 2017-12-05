@@ -10,7 +10,7 @@ namespace Framework\Providers;
 
 
 use Apps\Exceptions\Kernel;
-use Framework\Support\Exception\LoggerHandlerException;
+use Framework\Support\Exceptions\LoggerHandlerException;
 use Whoops\Handler\JsonResponseHandler;
 use Whoops\Handler\PlainTextHandler;
 use Whoops\Handler\PrettyPageHandler;
@@ -31,6 +31,8 @@ class ExceptionHandlerServiceProvider extends ServiceProvider
         $isDebug = $this->di->get('config')->debug;
         $this->di->setShared($this->serviceName,function () use ($isDebug) {
             $whoops = new Run;
+            // 日记处理
+            $whoops->pushHandler(new LoggerHandlerException());
 
             if ( $isDebug ) {
                 // 开始调试
@@ -44,11 +46,11 @@ class ExceptionHandlerServiceProvider extends ServiceProvider
                     $PrettyPageHandler->setPageTitle('发生错误');
                     $whoops->pushHandler( $PrettyPageHandler );
                 }
+            }elseif( Misc::isCommandLine() ){
+                (new Kernel())->registerForCli($whoops);
+            }else{
+                (new Kernel())->registerForWeb($whoops);
             }
-            // 日记处理
-            $whoops->pushHandler(new LoggerHandlerException());
-
-            (new Kernel())->register($whoops);
 
             return $whoops;
         });

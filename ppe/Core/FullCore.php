@@ -10,14 +10,9 @@ namespace Framework\Core;
 
 
 use Framework\Providers\ServiceProviderInterface;
-use Framework\Support\Exception\LoggerHandlerException;
 use Phalcon\DiInterface;
 use Phalcon\Mvc\ModuleDefinitionInterface;
-use Whoops\Handler\JsonResponseHandler;
-use Whoops\Handler\PlainTextHandler;
-use Whoops\Handler\PrettyPageHandler;
-use Whoops\Run;
-use Whoops\Util\Misc;
+
 
 class FullCore implements ModuleDefinitionInterface
 {

@@ -7,5 +7,6 @@
  */
 
 return [
+    \Apps\Console\Commands\DemoCommand::class,
 
 ];

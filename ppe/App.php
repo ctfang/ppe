@@ -18,6 +18,7 @@ use Phalcon\Mvc\Application;
 
 class App
 {
+    public static $path;
     /**
      * @var \Phalcon\DI
      */
@@ -32,7 +33,7 @@ class App
     {
         $this->di                = new FactoryDefault();
         $this->applicationPath = $applicationPath;
-
+        self::$path              = $applicationPath;
         $this->di->setShared('bootstrap', $this);
     }
 

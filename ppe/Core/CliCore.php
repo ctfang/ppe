@@ -22,7 +22,7 @@ class CliCore implements ModuleDefinitionInterface
      */
     public function registerAutoloaders(DiInterface $dependencyInjector = null)
     {
-        $dependencyInjector->get('log')->warning('registerAutoloaders');
+
     }
 
     /**
@@ -32,6 +32,6 @@ class CliCore implements ModuleDefinitionInterface
      */
     public function registerServices(DiInterface $dependencyInjector)
     {
-        $dependencyInjector->get('log')->error('registerServices');
+
     }
 }

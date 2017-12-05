@@ -16,15 +16,24 @@ use Whoops\Run;
 class Kernel implements ExceptionKernel
 {
     /**
-     * 注册自定义错误处理
+     * 注册自定义错误处理-CLI模块
      *
      * @param Run $run
      */
-    public function register(Run &$run)
+    public function registerForCli(Run &$run)
+    {
+
+    }
+
+    /**
+     * 注册自定义错误处理-页面模块
+     *
+     * @param Run $run
+     */
+    public function registerForWeb(Run &$run)
     {
         // 500页面显示
         $run->pushHandler(new ShowProdHandler());
-
         // 404页面显示
         $run->pushHandler(new NotRouteHandler());
     }

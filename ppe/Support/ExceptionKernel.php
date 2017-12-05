@@ -12,5 +12,6 @@ use Whoops\Run;
 
 interface ExceptionKernel
 {
-    public function register(Run &$run);
+    public function registerForCli(Run &$run);
+    public function registerForWeb(Run &$run);
 }

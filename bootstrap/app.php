@@ -19,6 +19,7 @@ $app->initializeServices([
     \Framework\Providers\MvcDispatcherServiceProvider::class,
     \Framework\Providers\LoggerServiceProvider::class,
     \Framework\Providers\ExceptionHandlerServiceProvider::class,
+    \Framework\Providers\LoadFacadeServiceProvider::class,
 ]);
 
 $app->init();
