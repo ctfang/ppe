@@ -37,8 +37,6 @@ class FullCore implements ModuleDefinitionInterface
         foreach ($providers as $name => $class) {
             $this->initializeService(new $class($di));
         }
-
-
     }
 
     /**

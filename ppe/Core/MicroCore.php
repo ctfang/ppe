@@ -9,6 +9,7 @@
 namespace Framework\Core;
 
 
+use Framework\Providers\ServiceProviderInterface;
 use Phalcon\DiInterface;
 use Phalcon\Mvc\ModuleDefinitionInterface;
 use Whoops\Handler\PrettyPageHandler;
@@ -24,18 +25,31 @@ class MicroCore implements ModuleDefinitionInterface
      */
     public function registerAutoloaders(DiInterface $dependencyInjector = null)
     {
-        $whoops = new Run;
-        $whoops->pushHandler(new PrettyPageHandler);
-        $whoops->register();
+
     }
 
     /**
      * Registers services related to the module
      *
-     * @param DiInterface $dependencyInjector
+     * @param DiInterface $di
      */
-    public function registerServices(DiInterface $dependencyInjector)
+    public function registerServices(DiInterface $di)
     {
-        // TODO: Implement registerServices() method.
+        $providers = include $di->getShared('module')->modulePath . "/Config/providers.php";
+        foreach ($providers as $name => $class) {
+            $this->initializeService(new $class($di));
+        }
+    }
+
+    /**
+     * Initialize the Service in the Dependency Injector Container.
+     *
+     * @param ServiceProviderInterface $serviceProvider
+     *
+     * @return $this
+     */
+    protected function initializeService(ServiceProviderInterface $serviceProvider)
+    {
+        $serviceProvider->register();
     }
 }

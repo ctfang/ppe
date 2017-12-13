@@ -8,6 +8,7 @@
 
 namespace Framework;
 
+use Dotenv\Dotenv;
 use Framework\Core\CliCore;
 use Framework\Core\FullCore;
 use Framework\Core\MicroCore;
@@ -29,8 +30,16 @@ class App
     private $application;
     public  $applicationPath;
 
+    /**
+     * App constructor.
+     * @param $applicationPath
+     */
     public function __construct($applicationPath)
     {
+        if( file_exists($applicationPath.'/.env') ){
+            $env = new Dotenv($applicationPath.'/');
+            $env->load();
+        }
         $this->di                = new FactoryDefault();
         $this->applicationPath = $applicationPath;
         self::$path              = $applicationPath;
@@ -42,10 +51,13 @@ class App
      */
     public function init()
     {
-        $this->application = IS_CLI?new CliApp($this->di):new WebApp($this->di);
+        $this->registerException();
+        $this->registerAutoLoadFacades();
         if( !IS_CLI ){
+            $this->application = new WebApp($this->di);
             $this->initModule();
         }else{
+            $this->application = new CliApp($this->di);
             $this->application->registerModules([
                 'cli'=>[
                     "className" => CliCore::class,
@@ -53,6 +65,15 @@ class App
                 ],
             ]);
         }
+    }
+
+    /**
+     * 注册异常处理
+     */
+    protected function registerException()
+    {
+        $whoops = $this->di->getShared('exception');
+        $whoops->register();
     }
 
     /**
@@ -81,9 +102,27 @@ class App
         $this->application->registerModules($arrModules);
     }
 
+    /**
+     * 门脸启用
+     */
     public function registerAutoLoadFacades()
     {
-
+        if( $this->di->has('facade') ){
+            $di = $this->di;
+            spl_autoload_register(function ($class) use ($di) {
+                $Kernel = $di->getShared('facade');
+                if ($Kernel->hasClass($class)) {
+                    $facade = $Kernel->getFacade($class);
+                    class_alias($facade, $class);
+                    $stringOrObject = $facade::getFacadesAccessor();
+                    if (is_string($stringOrObject)) {
+                        $facade::setFacades(new $class());
+                    } else {
+                        $facade::setFacades($stringOrObject);
+                    }
+                }
+            });
+        }
     }
 
     /**

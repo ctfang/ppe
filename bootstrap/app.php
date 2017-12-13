@@ -13,7 +13,6 @@ defined('IS_CLI') or define('IS_CLI',false);
 $app = new App(dirname(__DIR__));
 
 $app->initializeServices([
-    \Framework\Providers\LoadEnvServiceProvider::class,
     \Framework\Providers\ConfigServiceProvider::class,
     \Framework\Providers\ModulesRouteServiceProvider::class,
     \Framework\Providers\MvcDispatcherServiceProvider::class,

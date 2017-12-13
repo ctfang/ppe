@@ -8,6 +8,7 @@
 
 namespace Apps\Exceptions;
 
+use Apps\Exceptions\Handlers\EmailHandler;
 use Apps\Exceptions\Handlers\NotRouteHandler;
 use Apps\Exceptions\Handlers\ShowProdHandler;
 use Framework\Support\ExceptionKernel;
@@ -22,7 +23,7 @@ class Kernel implements ExceptionKernel
      */
     public function registerForCli(Run &$run)
     {
-
+        $run->pushHandler(new EmailHandler());
     }
 
     /**

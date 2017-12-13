@@ -54,8 +54,5 @@ class ExceptionHandlerServiceProvider extends ServiceProvider
 
             return $whoops;
         });
-
-        $whoops = $this->di->getShared('exception');
-        $whoops->register();
     }
 }

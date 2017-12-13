@@ -25,20 +25,5 @@ class LoadFacadeServiceProvider extends ServiceProvider
         $this->di->set($this->serviceName, function () {
             return new Kernel();
         });
-        // 注册
-        $di = $this->di;
-        spl_autoload_register(function ($class) use ($di) {
-            $Kernel = $di->getShared('facade');
-            if ($Kernel->hasClass($class)) {
-                $facade = $Kernel->getFacade($class);
-                class_alias($facade, $class);
-                $stringOrObject = $facade::getFacadesAccessor();
-                if (is_string($stringOrObject)) {
-                    $facade::setFacades(new $class());
-                } else {
-                    $facade::setFacades($stringOrObject);
-                }
-            }
-        });
     }
 }
