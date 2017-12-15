@@ -19,7 +19,7 @@ use Phalcon\Mvc\Application;
 
 class App
 {
-    public static $path;
+    private static $path;
     /**
      * @var \Phalcon\DI
      */
@@ -28,7 +28,6 @@ class App
      * @var Application
      */
     private $application;
-    public  $applicationPath;
 
     /**
      * App constructor.
@@ -36,14 +35,23 @@ class App
      */
     public function __construct($applicationPath)
     {
-        if( file_exists($applicationPath.'/.env') ){
-            $env = new Dotenv($applicationPath.'/');
+        self::$path = $applicationPath;
+        
+        if (file_exists($applicationPath . '/.env')) {
+            $env = new Dotenv($applicationPath . '/');
             $env->load();
         }
-        $this->di                = new FactoryDefault();
-        $this->applicationPath = $applicationPath;
-        self::$path              = $applicationPath;
-        $this->di->setShared('bootstrap', $this);
+        $this->di   = new FactoryDefault();
+    }
+
+    /**
+     * 获取项目根目录
+     *
+     * @return mixed
+     */
+    public static function getRootPath()
+    {
+        return self::$path;
     }
 
     /**
@@ -53,13 +61,13 @@ class App
     {
         $this->registerException();
         $this->registerAutoLoadFacades();
-        if( !IS_CLI ){
+        if (!IS_CLI) {
             $this->application = new WebApp($this->di);
             $this->initModule();
-        }else{
+        } else {
             $this->application = new CliApp($this->di);
             $this->application->registerModules([
-                'cli'=>[
+                'cli' => [
                     "className" => CliCore::class,
                     "path"      => __DIR__ . '/Core/CliCore.php',
                 ],
@@ -107,7 +115,7 @@ class App
      */
     public function registerAutoLoadFacades()
     {
-        if( $this->di->has('facade') ){
+        if ($this->di->has('facade')) {
             $di = $this->di;
             spl_autoload_register(function ($class) use ($di) {
                 $Kernel = $di->getShared('facade');

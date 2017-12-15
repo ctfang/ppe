@@ -9,6 +9,7 @@
 namespace Framework\Providers;
 
 
+use Framework\App;
 use Phalcon\Config;
 use Phalcon\Mvc\Router;
 
@@ -31,11 +32,9 @@ class ModulesRouteServiceProvider extends ServiceProvider
 
     private function registerConsole()
     {
-        $applicationPath = $this->di->getShared('bootstrap')->applicationPath;
-
-        $this->di->set('module',function ()use ($applicationPath){
+        $this->di->set('module',function (){
             return new Config([
-                'modulePath'=>$applicationPath.'/apps/Console',
+                'modulePath'=>App::getRootPath().'/apps/Console',
                 'defaultNamespace'=>"\\Apps\\Console\\Tasks",
             ]);
         });
@@ -104,7 +103,7 @@ class ModulesRouteServiceProvider extends ServiceProvider
         }
         $router->handle($_SERVER['HTTP_HOST'].$_SERVER['REDIRECT_URL']);
 
-        $applicationPath = $this->di->getShared('bootstrap')->applicationPath;
+        $applicationPath = App::getRootPath();
         $moduleName      = $router->getModuleName();
         $nameSpace       = $modules[$moduleName]['nameSpace'];
 

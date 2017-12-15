@@ -23,7 +23,7 @@ class Kernel implements ExceptionKernel
      */
     public function registerForCli(Run &$run)
     {
-        $run->pushHandler(new EmailHandler());
+        // $run->pushHandler(new EmailHandler());
     }
 
     /**

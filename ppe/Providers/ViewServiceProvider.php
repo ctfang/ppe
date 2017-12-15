@@ -9,6 +9,7 @@
 namespace Framework\Providers;
 
 
+use Framework\App;
 use Phalcon\Di;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\View\Engine\Volt;
@@ -37,7 +38,7 @@ class ViewServiceProvider extends ServiceProvider
                     $volt->setOptions([
                         // 编译目录
                         'compiledPath' => function ($template) use($di) {
-                            $templatePath = $di->getShared('bootstrap')->applicationPath . '/storage/cache/view';
+                            $templatePath = App::getRootPath() . '/storage/cache/view';
 
                             $arrPath = explode('/Views/',$template);
                             unset($arrPath[0]);

@@ -42,8 +42,8 @@ class CliApp
         }else{
             $application = new Application();
             $application->add(new ScheduleCommand($schedule));
-            if( file_exists(App::$path.'/apps/Console/Config/commands.php') ){
-                $arrCommand  = include_once App::$path.'/apps/Console/Config/commands.php';
+            if( file_exists(App::getRootPath().'/apps/Console/Config/commands.php') ){
+                $arrCommand  = include_once App::getRootPath().'/apps/Console/Config/commands.php';
                 if( is_array($arrCommand) ){
                     foreach ($arrCommand as $class){
                         $application->add(new $class());

@@ -31,9 +31,6 @@ class ExceptionHandlerServiceProvider extends ServiceProvider
         $isDebug = $this->di->get('config')->debug;
         $this->di->setShared($this->serviceName,function () use ($isDebug) {
             $whoops = new Run;
-            // 日记处理
-            $whoops->pushHandler(new LoggerHandlerException());
-
             if ( $isDebug ) {
                 // 开始调试
                 if( Misc::isCommandLine() ){
@@ -46,11 +43,17 @@ class ExceptionHandlerServiceProvider extends ServiceProvider
                     $PrettyPageHandler->setPageTitle('发生错误');
                     $whoops->pushHandler( $PrettyPageHandler );
                 }
-            }elseif( Misc::isCommandLine() ){
+            }else{
+                // 非调试-不报告 E_NOTICE && E_WARNING
+                error_reporting(E_ALL^E_NOTICE^E_WARNING);
+            }
+            if( Misc::isCommandLine() ){
                 (new Kernel())->registerForCli($whoops);
             }else{
                 (new Kernel())->registerForWeb($whoops);
             }
+            // 日记处理
+            $whoops->pushHandler(new LoggerHandlerException());
 
             return $whoops;
         });

@@ -9,6 +9,7 @@
 namespace Framework\Providers;
 
 
+use Framework\App;
 use Phalcon\Config;
 
 class ConfigServiceProvider extends ServiceProvider
@@ -22,10 +23,8 @@ class ConfigServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $applicationPath = $this->di->getShared('bootstrap')->applicationPath;
-
-        $this->di->setShared($this->serviceName,function () use ($applicationPath) {
-            $config = require $applicationPath.'/config/app.php';
+        $this->di->setShared($this->serviceName,function (){
+            $config = require App::getRootPath().'/config/app.php';
             if (is_array($config)) {
                 $config = new Config($config);
             }

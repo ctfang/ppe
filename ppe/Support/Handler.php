@@ -8,6 +8,7 @@
 
 namespace Framework\Support;
 
+use Framework\App;
 use Phalcon\Di;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\View\Engine\Volt;
@@ -25,7 +26,7 @@ abstract class Handler extends \Whoops\Handler\Handler
          * 为了跨模块显示错误页面，这里重新设置了路径
          */
         $di              = Di::getDefault();
-        $applicationPath = $di->getShared('bootstrap')->applicationPath;
+        $applicationPath = App::getRootPath();
         $view            = $di->getShared('view');
         $viewDir         = $applicationPath . '/apps/Modules/Common/Views/';
         $view->setViewsDir($viewDir);
@@ -35,7 +36,7 @@ abstract class Handler extends \Whoops\Handler\Handler
 
                 $volt->setOptions([
                     // 编译目录
-                    'compiledPath' => $di->getShared('bootstrap')->applicationPath . '/storage/cache/view',
+                    'compiledPath' => App::getRootPath() . '/storage/cache/view',
                 ]);
 
                 return $volt;
