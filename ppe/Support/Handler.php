@@ -28,7 +28,7 @@ abstract class Handler extends \Whoops\Handler\Handler
         $di              = Di::getDefault();
         $applicationPath = App::getRootPath();
         $view            = $di->getShared('view');
-        $viewDir         = $applicationPath . '/apps/Modules/Common/Views/';
+        $viewDir         = $applicationPath . '/apps/Http/Common/Views/';
         $view->setViewsDir($viewDir);
         $view->registerEngines([
             ".html" => function ($view, Di $di) {

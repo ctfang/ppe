@@ -6,15 +6,15 @@
  * Time: 15:06
  */
 
-namespace Apps\Modules\Index\Controllers;
+namespace Apps\Http\Index\Controllers;
 
-use Apps\Modules\Common\Controllers\Controller;
+use Apps\Http\Common\Controllers\Controller;
 
 class IndexController extends Controller
 {
     public function index()
     {
-        throw new \Exception('发送报错');
+        throw new \Exception('测试错误');
         $this->view->pick('home');
     }
 

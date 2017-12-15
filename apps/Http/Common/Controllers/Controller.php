@@ -6,7 +6,7 @@
  * Time: 14:24
  */
 
-namespace Apps\Modules\Common\Controllers;
+namespace Apps\Http\Common\Controllers;
 
 
 class Controller extends \Phalcon\Mvc\Controller

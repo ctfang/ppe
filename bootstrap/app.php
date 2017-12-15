@@ -19,6 +19,8 @@ $app->initializeServices([
     \Framework\Providers\LoggerServiceProvider::class,
     \Framework\Providers\ExceptionHandlerServiceProvider::class,
     \Framework\Providers\LoadFacadeServiceProvider::class,
+
+    \Framework\Providers\DatabaseServiceProvider::class,
 ]);
 
 $app->init();

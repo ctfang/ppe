@@ -6,7 +6,7 @@
  * Time: 17:42
  */
 
-namespace Apps\Modules\Index\Controllers;
+namespace Apps\Http\Index\Controllers;
 
 use Phalcon\Mvc\Controller;
 

@@ -9,8 +9,9 @@
 namespace Framework\Providers;
 
 
+use Apps\Listeners\DbListener;
 use Phalcon\Db\Adapter\Pdo\Mysql;
-use Phalcon\Mvc\Model\Manager;
+use Phalcon\Events\Manager;
 
 class DatabaseServiceProvider extends ServiceProvider
 {
@@ -25,10 +26,9 @@ class DatabaseServiceProvider extends ServiceProvider
     {
         $this->di->setShared($this->serviceName, function () {
             $eventsManager = new Manager();
-            $dataBaseCfg = $this->getShared('config')->database->toArray();
-            $connection  = new Mysql($dataBaseCfg['database']);
-            unset($dataBaseCfg);
-            $eventsManager->attach('db', new DatabaseEvent());
+            $defaultDbConfig = \Config::get('database.default')->toArray();
+            $connection  = new Mysql($defaultDbConfig);
+            $eventsManager->attach('db', new DbListener());
             $connection->setEventsManager($eventsManager);
             return $connection;
         });
