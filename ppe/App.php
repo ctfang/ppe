@@ -59,7 +59,11 @@ class App
      */
     public function init()
     {
+        // 时区设置
+        date_default_timezone_set( $this->di->getShared('config')->timezone );
+        // 异常注册
         $this->registerException();
+        // 门脸注册
         $this->registerAutoLoadFacades();
         if (!IS_CLI) {
             $this->application = new WebApp($this->di);
