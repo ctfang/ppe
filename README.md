@@ -51,6 +51,13 @@ Facades的使用对开发非常有帮助，例如发送短信功能，本地调�
 
 已有handler（错误日志记录，404页面处理,500页面处理）
 
+## 如何对框架进行修改
+
+本框架完全使用DI贯穿整个项目，为了就是可像usb那样，快速切换或者添加功能
+
+修改[boostsrap/app.php](CODE_OF_CONDUCT.md)文件的initializeServices内容，就可以替换框架任意功能
+
+
 ## License
 
 The ppe framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
