@@ -1,5 +1,5 @@
 /storage
-.idea/*
+/.idea
 /vendor
 composer.phar
 /public/storage
