@@ -47,7 +47,7 @@ Facades的使用对开发非常有帮助，例如发送短信功能，本地调�
 
 ## Exceptions异常
 
-处理框架自带的异常处理handler外，可以在[apps/Exceptions/Kernel.php](CODE_OF_CONDUCT.md)注册业务异常处理
+处理框架自带的异常处理handler外，可以在[apps/Exceptions/Kernel.php](CODE_OF_CONDUCT.md)注册业务异常处理，例如错误发生邮件、发生日记管理系统
 
 已有handler（错误日志记录，404页面处理,500页面处理）
 
