@@ -9,15 +9,6 @@
       "email": "2206582181@qq.com"
     }
   ],
-  "autoload": {
-    "psr-4": {
-      "Apps\\": "apps/",
-      "Framework\\": "ppe/"
-    },
-    "files":[
-      "ppe/helpers.php"
-    ]
-  },
   "autoload-dev": {
     "psr-4": {
       "Tests\\": "tests/"
@@ -30,17 +21,9 @@
     }
   },
   "require": {
-    "vlucas/phpdotenv": "^2.4",
-    "symfony/debug": "^3.3",
-    "symfony/var-dumper": "^3.3",
-    "symfony/console": "~3.3",
-    "monolog/monolog": "~1.12",
-    "filp/whoops": "^2.1.4",
+    "selden1992/ppe-framework": "^1.0",
     "mashape/unirest-php": "^3.0",
     "chrisboulton/php-resque": "^1.2",
     "phpmailer/phpmailer": "^6.0"
-  },
-  "require-dev": {
-    "phalcon/ide-stubs": "*"
   }
 }

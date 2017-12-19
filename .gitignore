@@ -1,9 +1,9 @@
-/storage/
+/storage
 .idea/*
-public/storage
-public/hot
-storage
+/vendor
+composer.phar
+/public/storage
+/public/hot
 .env.*.php
 .env.php
 .env
-composer.phar
