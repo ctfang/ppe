@@ -1,7 +1,8 @@
 {
   "name": "selden1992/ppe",
-  "description": "framework",
-  "license": "proprietary",
+  "description": "The ppe Framework.",
+  "keywords": ["framework", "phalcon", "laravel"],
+  "license": "MIT",
   "type": "project",
   "authors": [
     {
