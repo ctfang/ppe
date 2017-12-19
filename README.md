@@ -1,4 +1,4 @@
-一个基于phalcon的laravel框架，php7.0以上才能运行
+一个基于phalcon的laravel框架，php7.0以上版本，composer安装
 <p align="center">
 <a href="https://packagist.org/packages/selden1992/ppe"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
 <a href="https://packagist.org/packages/selden1992/ppe"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
@@ -18,6 +18,12 @@
 - [日志](https://packagist.org/packages/selden1992/ppe) 默认使用monolog，因为phalcon自带的log不好扩展，当然，也允许使用phalcon的log类，只要Di注入即可
 - [事件](https://packagist.org/packages/selden1992/ppe) 事件和监听器配置，可以满足大多数需求变更
 
+## 安装
+
+如果安装不上，记得切换国内composer镜像
+~~~~
+composer create-project selden1992/ppe
+~~~~
 
 ## 多模块
 
