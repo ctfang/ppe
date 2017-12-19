@@ -42,7 +42,7 @@ Facades的使用对开发非常有帮助，例如发送短信功能，本地调�
 
 [apps/Facades/Kernel.php](CODE_OF_CONDUCT.md)注册业务门脸
 
-所有门脸都是惰性加载，性能影响很少
+所有门脸都是惰性加载
 
 
 ## Exceptions异常
