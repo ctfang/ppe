@@ -9,6 +9,7 @@
 namespace Apps\Facades;
 
 use Apps\Facades\Containers\ConfigContainer;
+use Apps\Facades\Containers\QueueContainer;
 use Framework\Support\Containers\LogContainer;
 use Framework\Support\FacadeKernel;
 
@@ -24,6 +25,7 @@ class Kernel extends FacadeKernel
         return [
             'Log'=>LogContainer::class,
             'Config'=>ConfigContainer::class,
+            'Queue'=>QueueContainer::class,
         ];
     }
 }

@@ -9,4 +9,7 @@
 return [
     \Apps\Console\Commands\DemoCommand::class,
 
+    \Apps\Console\Commands\CreateIdeCommand::class,
+
+    \Apps\Console\Commands\Queue\StartCommand::class,
 ];

@@ -20,7 +20,10 @@ $app->initializeServices([
     \Framework\Providers\ExceptionHandlerServiceProvider::class,
     \Framework\Providers\LoadFacadeServiceProvider::class,
 
+    // 引入数据库
     \Framework\Providers\DatabaseServiceProvider::class,
+    // 引入队列
+    \Apps\Providers\QueueServiceProvider::class,
 ]);
 
 $app->init();
