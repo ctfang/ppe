@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: baichou
+ * User: 明月有色
  * Date: 2017/12/20
  * Time: 14:27
  */
@@ -32,6 +32,19 @@ class StartCommand extends Command
         }else{
             $runGroup = [$group];
         }
-        \Log::info('');
+        $count = getenv('WORKER_COUNT');
+
+        for ($i = 0; $i < $count; ++$i) {
+            $pid = pcntl_fork();
+            if ($pid == -1) {
+                die("Could not fork worker " . $i . "\n");
+            }else if (!$pid) {
+                $queues           = explode(',', getenv('LISTEN_QUEUE'));
+                $worker           = new Resque_Worker($queues);
+                fwrite(STDOUT, '*** Starting worker ' . $worker . "\n");
+                $worker->work(getenv('WORKER_INTERVAL'));
+                break;
+            }
+        }
     }
 }
