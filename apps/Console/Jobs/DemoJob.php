@@ -6,7 +6,7 @@
  * Time: 19:52
  */
 
-namespace Apps\Jobs;
+namespace Apps\Console\Jobs;
 
 
 use Framework\Support\Queue;
@@ -16,10 +16,26 @@ class DemoJob extends Queue
     protected $queueName = 'default';
 
     protected $test;
+    protected $optional;
 
-    protected function setTestValue($value)
+    /**
+     * 必须传入的值
+     *
+     * @param $value
+     */
+    protected function setParamTestValue($value)
     {
         $this->test = $value;
+    }
+
+    /**
+     * 可选参数
+     *
+     * @param string $optional
+     */
+    protected function setParamTestOptional($optional='默认值')
+    {
+        $this->optional = $optional;
     }
 
     /**
@@ -30,5 +46,6 @@ class DemoJob extends Queue
     public function handle()
     {
         \Log::info('队列参数'.$this->test);
+        dump($ffff);
     }
 }

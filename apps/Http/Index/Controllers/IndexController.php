@@ -8,6 +8,7 @@
 
 namespace Apps\Http\Index\Controllers;
 
+use Apps\Console\Jobs\DemoJob;
 use Apps\Http\Common\Controllers\Controller;
 
 class IndexController extends Controller
@@ -27,10 +28,13 @@ class IndexController extends Controller
     }
 
     /**
-     * warning日记记录
+     * 测试队列推入
      */
-    public function waring()
+    public function testAddQueue()
     {
-        file_get_contents('/fdasf/fdsafdsa');
+        $id = \Queue::put(new DemoJob([
+            'TestValue'=>time(),
+        ]));
+        dump($id);
     }
 }

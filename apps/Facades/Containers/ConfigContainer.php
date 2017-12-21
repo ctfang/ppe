@@ -41,7 +41,7 @@ class ConfigContainer implements FacadeInterface
      * @param string $default
      * @return mixed|null|Config
      */
-    public function get($key=null,$default=null)
+    public static function get($key=null,$default=null)
     {
         if( $key===null ){
             return self::$_instance;
@@ -80,7 +80,7 @@ class ConfigContainer implements FacadeInterface
         return $value;
     }
 
-    private function getFileConfig($fileName)
+    private static function getFileConfig($fileName)
     {
         $value = false;
         $configFile = Di::getDefault()->getShared("module")->modulePath . "/Config/{$fileName}.php";
