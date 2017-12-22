@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: baichou
+ * User: 明月有色
  * Date: 2017/12/20
  * Time: 19:52
  */
@@ -46,6 +46,5 @@ class DemoJob extends Queue
     public function handle()
     {
         \Log::info('队列参数'.$this->test);
-        dump($ffff);
     }
 }

@@ -8,8 +8,9 @@
 
 namespace Apps\Exceptions;
 
-use Apps\Exceptions\Handlers\EmailHandler;
+use Apps\Exceptions\Handlers\ErrorEmailHandler;
 use Apps\Exceptions\Handlers\NotRouteHandler;
+use Apps\Exceptions\Handlers\QueueHandler;
 use Apps\Exceptions\Handlers\ShowProdHandler;
 use Framework\Support\ExceptionKernel;
 use Whoops\Run;
@@ -23,7 +24,8 @@ class Kernel implements ExceptionKernel
      */
     public function registerForCli(Run &$run)
     {
-        // $run->pushHandler(new EmailHandler());
+        $run->pushHandler(new ErrorEmailHandler());
+        $run->pushHandler(new QueueHandler());
     }
 
     /**
@@ -33,6 +35,7 @@ class Kernel implements ExceptionKernel
      */
     public function registerForWeb(Run &$run)
     {
+        $run->pushHandler(new ErrorEmailHandler());
         // 500页面显示
         $run->pushHandler(new ShowProdHandler());
         // 404页面显示
