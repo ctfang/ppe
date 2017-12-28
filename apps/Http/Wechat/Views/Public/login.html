@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link href="/static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/admin/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+
+    <link href="/static/admin/css/animate.min.css" rel="stylesheet">
+    <link href="/static/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
+</head>
+<body class="gray-bg">
+
+<div class="middle-box text-center loginscreen  animated fadeInDown">
+    <div>
+        <h3>欢迎使用</h3>
+        <form class="m-t" role="form" action="index/doLogin">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="用户名" required="" name="username" value="{{ username }}" />
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="密码" required="" name="pwd" />
+            </div>
+            <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
+        </form>
+    </div>
+</div>
+<script src="/static/admin/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/admin/js/bootstrap.min.js?v=3.3.6"></script>
+</body>
+</html>

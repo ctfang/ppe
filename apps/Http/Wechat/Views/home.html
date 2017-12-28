@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>聊天</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+
+    <script src="/static/admin/js/jquery.min.js"></script>
+    <script src="/static/layui/layui.js"></script>
+    <script src="/static/api.config.js"></script>
+</head>
+<body style="background: url(/static/admin/images/irongrip.png) repeat">
+
+<script type="text/javascript">
+    //localStorage.clear();
+    layui.use('layim', function (layim) {
+        //基础配置
+        layim.config({
+
+            //获取主面板列表信息
+            init: {
+                url: webRoute.panel.init //接口地址（返回的数据格式见下文）
+                , type: 'get' //默认get，一般可不填
+                , data: {
+                    uid: '{{ uid }}',
+                } //额外参数
+            }
+            //获取群员接口
+            , members: {
+                url: webRoute.panel.getMembers //接口地址（返回的数据格式见下文）
+                , type: 'get' //默认get，一般可不填
+                , data: {
+                    uid: '{{ uid }}',
+                } //额外参数
+            },
+            uploadFile: {
+                url: webRoute.chat.uploadFile
+            }
+            , uploadImage: {
+                url: webRoute.chat.uploadimg
+            }
+            , brief: false //是否简约模式（默认false，如果只用到在线客服，且不想显示主面板，可以设置 true）
+            , title: '聊天' //主面板最小化后显示的名称
+            , maxLength: 3000 //最长发送的字符长度，默认3000
+            , isfriend: true //是否开启好友（默认true，即开启）
+            , isgroup: true //是否开启群组（默认true，即开启）
+            , right: '0px' //默认0px，用于设定主面板右偏移量。该参数可避免遮盖你页面右下角已经的bar。
+            , chatLog: webRoute.chat.log //聊天记录地址（如果未填则不显示）
+            , find: webRoute.panel.findGroup //查找好友/群的地址（如果未填则不显示）
+            , copyright: false //是否授权，如果通过官网捐赠获得LayIM，此处可填true
+        });
+
+        //建立WebSocket通讯
+        var socket = new WebSocket(socketUri);
+
+        //连接成功时触发
+        socket.onopen = function () {
+            console.log("websocket握手成功!");
+        };
+
+        //监听收到的消息
+        socket.onmessage = function (res) {
+            var messageData = eval("(" + res.data + ")");
+            var messageType = messageData.message_type;
+            var data = messageData.data;
+            switch (messageType) {
+                // 服务端ping客户端
+                case 'ping':
+                    socket.send('{"type":"ping"}');
+                    break;
+                // 登录 更新用户列表
+                case 'init':
+                    $.post(webRoute.bind, {'client_id': data.client_id});
+                    break;
+                //添加 用户
+                case 'addUser':
+                    //console.log(data.data);
+                    layim.addList(data.data);
+                    break;
+                //删除 用户
+                case 'delUser':
+                    layim.removeList({
+                        type: 'friend'
+                        , id: data.data.id //好友或者群组ID
+                    });
+                    break;
+                // 添加 分组信息
+                case 'addGroup':
+                    // console.log(data.data);
+                    layim.addList(data.data);
+                    break;
+                case 'delGroup':
+                    layim.removeList({
+                        type: 'group'
+                        , id: data.data.id //好友或者群组ID
+                    });
+                    break;
+                // 检测聊天数据
+                case 'chatMessage':
+                    layim.getMessage(data);
+                    break;
+                // 离线消息推送
+                case 'logMessage':
+                    setTimeout(function () {
+                        layim.getMessage(data.data)
+                    }, 1000);
+                    break;
+                // 用户退出 更新用户列表
+                case 'logout':
+                    break;
+                //聊天还有不在线
+                case 'ctUserOutline':
+                    console.log('11111');
+                    //layer.msg('好友不在线', {'time' : 1000});
+                    break;
+
+            }
+        };
+
+        //layim建立就绪
+        layim.on('ready', function (res) {
+
+            layim.on('sendMessage', function (res) {
+                // 发送消息
+//                var mine = JSON.stringify(res.mine);
+//                var to = JSON.stringify(res.to);
+                $.post(webRoute.chat.send, res);
+            });
+        });
+
+    });
+</script>
+</body>
+</html>
