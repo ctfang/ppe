@@ -26,7 +26,10 @@
     "selden1992/ppe-framework": "^1.0",
     "mashape/unirest-php": "^3.0",
     "chrisboulton/php-resque": "^1.2",
-    "phpmailer/phpmailer": "^6.0"
+    "phpmailer/phpmailer": "^6.0",
+    "workerman/gateway-worker": "^3.0",
+    "yzalis/identicon": "^1.2",
+    "workerman/gatewayclient": "^3.0"
   },
   "require-dev": {
     "phalcon/ide-stubs": "*"
