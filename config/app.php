@@ -47,9 +47,9 @@ return [
     'modules' => [
         "wechat" => [
             // 命名空间格式名称
-            "nameSpace" => 'Wechat',
+            "nameSpace" => 'Index',
             // 绑定的域名
-            "domain" => "wechat.ppe.app",
+            "domain" => "www.ppe.app",
             // 核心类型
             'core' => 'full',
         ],
