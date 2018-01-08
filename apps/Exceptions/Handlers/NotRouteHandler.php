@@ -13,6 +13,7 @@ use Framework\Support\Handler;
 use Phalcon\Di;
 use Phalcon\Mvc\Dispatcher\Exception;
 use Whoops\Exception\ErrorException;
+use Whoops\Util\Misc;
 
 class NotRouteHandler extends Handler
 {
@@ -22,6 +23,9 @@ class NotRouteHandler extends Handler
     public function handle()
     {
         if( $this->getException() instanceof Exception){
+            if( Misc::isAjaxRequest() ){
+                return false;
+            }
             /**
              * 当关闭调试模式时
              * 显示一个精简错误页面

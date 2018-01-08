@@ -13,11 +13,14 @@ use Framework\Support\Listeners\DatabaseListener;
 
 class DbListener extends DatabaseListener
 {
-    /**
-     * 在发送SQL到数据库前触发
-     */
-    public function beforeQuery()
+    public function beforeQuery($event, $connection)
     {
+        $data = $connection->getsqlVariables();
+        if( !empty($data) ){
 
+            \Log::debug("\n".$connection->getSQLStatement()."\n".var_export($data,true));
+        }else{
+            \Log::debug($connection->getSQLStatement());
+        }
     }
 }

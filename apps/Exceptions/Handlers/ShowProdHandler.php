@@ -12,6 +12,7 @@ use Framework\App;
 use Framework\Support\Handler;
 use Phalcon\Di;
 use Whoops\Exception\ErrorException;
+use Whoops\Util\Misc;
 
 /**
  * @package Apps\Exceptions\Handlers
@@ -23,6 +24,9 @@ class ShowProdHandler extends Handler
      */
     public function handle()
     {
+        if( Misc::isAjaxRequest() ){
+            return false;
+        }
         /**
          * 当关闭调试模式时
          * 显示一个精简错误页面
