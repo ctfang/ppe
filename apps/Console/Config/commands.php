@@ -12,4 +12,5 @@ return [
     \Apps\Console\Commands\CreateIdeCommand::class,
 
     \Apps\Console\Commands\Queue\StartCommand::class,
+    \Apps\Console\Commands\Queue\StopCommand::class,
 ];
