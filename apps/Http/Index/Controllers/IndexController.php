@@ -11,6 +11,6 @@ class IndexController extends Controller
      */
     public function index()
     {
-         throw new \Exception("编写你的代码");
+         //throw new \Exception("编写你的代码");
     }
 }

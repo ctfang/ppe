@@ -19,6 +19,7 @@ $app->initializeServices([
     \Framework\Providers\LoggerServiceProvider::class,
     \Framework\Providers\ExceptionHandlerServiceProvider::class,
     \Framework\Providers\LoadFacadeServiceProvider::class,
+    \Framework\Providers\EventServiceProvider::class,
 
     // 引入数据库
     \Framework\Providers\DatabaseServiceProvider::class,

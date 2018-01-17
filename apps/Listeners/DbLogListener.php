@@ -9,15 +9,15 @@
 namespace Apps\Listeners;
 
 
-use Framework\Support\Listeners\DatabaseListener;
+use Apps\Events\DbBeforeQueryEvent;
 
-class DbListener extends DatabaseListener
+class DbLogListener
 {
-    public function beforeQuery($event, $connection)
+    public function handle(DbBeforeQueryEvent $event)
     {
+        $connection = $event->connection;
         $data = $connection->getsqlVariables();
         if( !empty($data) ){
-
             \Log::debug("\n".$connection->getSQLStatement()."\n".var_export($data,true));
         }else{
             \Log::debug($connection->getSQLStatement());
