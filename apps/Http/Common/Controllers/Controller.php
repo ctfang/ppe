@@ -31,4 +31,13 @@ class Controller extends \Phalcon\Mvc\Controller
         }
         return $this->response;
     }
+
+    public function afterExecuteRoute()
+    {
+        $return = $this->dispatcher->getReturnedValue();
+        if (!$return instanceof $this->response && is_array($return)) {
+            // 使用 dispatcher::setReturnedValue 设置一下返回值，否则外部 response::getContent 获取不到内容
+            $this->dispatcher->setReturnedValue($this->response($return)->getContent());
+        }
+    }
 }
